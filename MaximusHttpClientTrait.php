@@ -13,16 +13,16 @@ class MaximusHttpClientTrait
      */
     protected function createProxyUrl(array $proxy): string
     {
-        // Directly call the method from HttpClientTrait using $this
-        $proxyUrl = $this->createProxyUrlFromTrait($proxy); 
+        // Directly call the original method from the HttpClientTrait using $this
+        $proxyUrl = $this->createProxyUrlOriginal($proxy); 
 
         // Remove 'ssl://' from proxy URL if present
         return str_replace('ssl://', '', $proxyUrl);  // Strip 'ssl://'
     }
 
-    // This method is used to access the original functionality in the trait
-    private function createProxyUrlFromTrait(array $proxy): string
+    // A method to directly call the trait's createProxyUrl method
+    private function createProxyUrlOriginal(array $proxy): string
     {
-        return parent::createProxyUrl($proxy);
+        return $this->createProxyUrl($proxy);  // Calling the original method from the trait
     }
 }
