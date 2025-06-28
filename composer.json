@@ -1,0 +1,13 @@
+{
+  "name": "custom/symfony-overrides",
+  "description": "Overrides for Symfony Mailer and HttpClient used in Magento",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Symfony\\Component\\Mailer\\Transport\\Smtp\\Stream\\": "src/Symfony/Mailer/Transport/Smtp/Stream/",
+      "Symfony\\Component\\HttpClient\\": "src/Symfony/HttpClient/"
+    }
+  },
+  "require": {}
+}
+
