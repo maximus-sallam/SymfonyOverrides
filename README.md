@@ -18,10 +18,10 @@ This package prevents `'ssl://'` from being automatically prepended to transport
 
 ## Installation
 
-1. Clone or copy this repo to your Magento installation under:
-   app/code/MaximusSallam/
+1. Clone this repository into your Magento installation under:
+   app/code/MaximusSallam/SymfonyOverrides/
 ```bash
-$ 
+$ git clone https://github.com/maximus-sallam/SymfonyOverrides.git app/code/MaximusSallam/SymfonyOverrides/
 ```
 
 2. Run the following to enable the module:
@@ -29,15 +29,17 @@ $
 $ php bin/magento module:enable MaximusSallam_SymfonyOverrides
 ```
 
-3. Once the module is enabled, run the following command to apply your changes:
+3. Once the module is enabled, run the following commands to apply your changes:
 ```bash
 $ php bin/magento setup:upgrade
+$ php bin/magento setup:di:compile
+$ php bin/magento setup:static-content:deploy
 ```
-This will update Magento's setup and register your new module.
+This will update Magento's setup and register your new module, compile Magento, and deploy your static content.
 
 4. Clear Magento cache:
 ```bash
-$ php bin/magento cache:clean
+$ php bin/magento cache:flush
 ```
 
 ## Notes
