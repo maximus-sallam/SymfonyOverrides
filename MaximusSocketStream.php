@@ -16,8 +16,19 @@ class MaximusSocketStream
         // Strip 'ssl://' from the URL if it exists
         $url = str_replace('ssl://', '', $url);
 
-        // Create an instance of the original SocketStream (composition)
+        // Create an instance of the original SocketStream (composer-style)
         $this->socketStream = new SymfonySocketStream($url, $timeout, $idleTimeout);
+    }
+
+    /**
+     * Delegate initialize() to the original SocketStream, removing ssl:// prefix.
+     */
+    public function initialize(): void
+    {
+        // Remove ssl:// from the URL
+        $url = str_replace('ssl://', '', $this->socketStream->getHost() . ':' . $this->socketStream->getPort());
+        $this->socketStream->setHost($url);
+        $this->socketStream->initialize();
     }
 
     /**
@@ -36,3 +47,4 @@ class MaximusSocketStream
         return $this->socketStream->getSocket();
     }
 }
+

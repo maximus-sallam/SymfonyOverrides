@@ -6,23 +6,22 @@ use Symfony\Component\HttpClient\HttpClientTrait as SymfonyHttpClientTrait;
 
 class MaximusHttpClientTrait
 {
-    use SymfonyHttpClientTrait;  // Use the original HttpClientTrait
+    use SymfonyHttpClientTrait;
 
     /**
-     * Overriding the proxy URL behavior to strip 'ssl://' prefix.
+     * Overriding the getProxy() method to strip 'ssl://' from the proxy URL.
      */
-    protected function createProxyUrl(array $proxy): string
+    private static function getProxy(?string $proxy, array $url, ?string $noProxy): ?array
     {
-        // Directly call the original method from the HttpClientTrait using $this
-        $proxyUrl = $this->createProxyUrlOriginal($proxy); 
+        // Call the original method from HttpClientTrait
+        $proxyData = parent::getProxy($proxy, $url, $noProxy);
 
-        // Remove 'ssl://' from proxy URL if present
-        return str_replace('ssl://', '', $proxyUrl);  // Strip 'ssl://'
-    }
+        // Check if the proxy URL exists and remove 'ssl://'
+        if ($proxyData && isset($proxyData['url'])) {
+            $proxyData['url'] = str_replace('ssl://', '', $proxyData['url']);
+        }
 
-    // A method to directly call the trait's createProxyUrl method
-    private function createProxyUrlOriginal(array $proxy): string
-    {
-        return $this->createProxyUrl($proxy);  // Calling the original method from the trait
+        return $proxyData;
     }
 }
+

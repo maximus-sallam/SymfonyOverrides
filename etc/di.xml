@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/di.xsd">
-    <!-- Replace Symfony's SocketStream with MaximusSocketStream -->
+    <!-- Replace Symfony's SocketStream with MaximusSocketStream (for the mailer) -->
     <preference for="Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream" type="MaximusSallam\SymfonyOverrides\MaximusSocketStream"/>
 
-    <!-- Replace Symfony's HttpClientTrait with MaximusHttpClientTrait -->
+    <!-- Replace Symfony's HttpClientTrait with MaximusHttpClientTrait (for HTTP client proxy handling) -->
     <preference for="Symfony\Component\HttpClient\HttpClientTrait" type="MaximusSallam\SymfonyOverrides\MaximusHttpClientTrait"/>
 </config>
