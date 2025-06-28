@@ -19,16 +19,19 @@ This package prevents `'ssl://'` from being automatically prepended to transport
 ## Installation
 
 1. Clone or copy this repo to your Magento installation under:
-   app/code/MaximusSallam/SymfonyOverrides
+   app/code/MaximusSallam/
+```bash
+$ 
+```
 
 2. Run the following to enable the module:
 ```bash
-$ bin/magento module:enable MaximusSallam_SymfonyOverrides
+$ php bin/magento module:enable MaximusSallam_SymfonyOverrides
 ```
 
 3. Once the module is enabled, run the following command to apply your changes:
 ```bash
-$ bin/magento setup:upgrade
+$ php bin/magento setup:upgrade
 ```
 This will update Magento's setup and register your new module.
 
@@ -36,7 +39,9 @@ This will update Magento's setup and register your new module.
 ```bash
 $ php bin/magento cache:clean
 ```
+
 ## Notes
+
 These overrides will survive Composer updates.
 
 This is intended as a fix for environments where forced SSL stream wrapping causes connection issues.
@@ -44,6 +49,7 @@ This is intended as a fix for environments where forced SSL stream wrapping caus
 Use only if you are certain your infrastructure handles TLS/SSL at the appropriate layer (e.g., STARTTLS, proxies, etc.).
 
 ## License
+
 This project is licensed under the GNU General Public License v2.0 (GPL-2.0).
 
 See the LICENSE file for full details.
