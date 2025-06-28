@@ -1,16 +1,38 @@
 <?php
+
 namespace MaximusSallam\SymfonyOverrides;
 
 use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream as SymfonySocketStream;
 
-class MaximusSocketStream extends SymfonySocketStream
+class MaximusSocketStream
 {
+    private SymfonySocketStream $socketStream;
+
+    /**
+     * Constructor where we strip 'ssl://' from the URL before passing it to the SocketStream.
+     */
     public function __construct(string $url, float $timeout = null, float $idleTimeout = null)
     {
-        // Remove 'ssl://' from the URL if it exists
+        // Strip 'ssl://' from the URL if it exists
         $url = str_replace('ssl://', '', $url);
-        
-        // Call the parent constructor with the modified URL
-        parent::__construct($url, $timeout, $idleTimeout);
+
+        // Create an instance of the original SocketStream (composition)
+        $this->socketStream = new SymfonySocketStream($url, $timeout, $idleTimeout);
+    }
+
+    /**
+     * Delegate connect() to the original SocketStream.
+     */
+    public function connect()
+    {
+        return $this->socketStream->connect();
+    }
+
+    /**
+     * Delegate getSocket() to the original SocketStream.
+     */
+    public function getSocket()
+    {
+        return $this->socketStream->getSocket();
     }
 }
