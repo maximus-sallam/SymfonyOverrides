@@ -33,7 +33,7 @@ This package prevents `'ssl://'` from being automatically prepended to transport
 3. Require the custom override:
 
 ```bash
-$ composer require custom/symfony-overrides:*
+$ composer require maximus_sallam/symfony-overrides:*
 $ composer dump-autoload
 ```
 4. Clear Magento cache:
