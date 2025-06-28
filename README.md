@@ -50,4 +50,5 @@ Use only if you are certain your infrastructure handles TLS/SSL at the appropria
 
 ## License
 This project is licensed under the GNU General Public License v2.0 (GPL-2.0).
+
 See the LICENSE file for full details.
